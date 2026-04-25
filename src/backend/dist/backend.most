@@ -1,0 +1,203 @@
+// Version: 3.0.0
+type Article__129739089 =
+  {
+    category : Text;
+    content : Text;
+    createdAt : Int;
+    date : Text;
+    excerpt : Text;
+    id : Nat;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    pdfUrl : ?Text;
+    tags : [Text];
+    title : Text
+  };
+type ContactSubmission__93684224 =
+  {
+    email : Text;
+    id : Nat;
+    isRead : Bool;
+    message : Text;
+    name : Text;
+    submittedAt : Int
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Note__618118824 =
+  {
+    content : Text;
+    createdAt : Int;
+    fileName : ?Text;
+    fileUrl : ?Text;
+    id : Nat;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    pdfUrl : ?Text;
+    title : Text
+  };
+type OldArticle__297329906 =
+  {
+    category : Text;
+    content : Text;
+    createdAt : Int;
+    date : Text;
+    excerpt : Text;
+    id : Nat;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    tags : [Text];
+    title : Text
+  };
+type OldNote__821963071 =
+  {
+    content : Text;
+    createdAt : Int;
+    fileName : ?Text;
+    fileUrl : ?Text;
+    id : Nat;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    title : Text
+  };
+type OldPublication__206192410 =
+  {
+    abstract : Text;
+    authors : [Text];
+    createdAt : Int;
+    doi : ?Text;
+    id : Nat;
+    imageUrl : ?Text;
+    journal : Text;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    title : Text;
+    year : Nat
+  };
+type OldResearch__619149766 =
+  {
+    createdAt : Int;
+    date : Text;
+    description : Text;
+    id : Nat;
+    imageUrl : ?Text;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    summary : Text;
+    tags : [Text];
+    title : Text
+  };
+type Publication__571801975 =
+  {
+    abstract : Text;
+    authors : [Text];
+    createdAt : Int;
+    doi : ?Text;
+    id : Nat;
+    imageUrl : ?Text;
+    journal : Text;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    pdfUrl : ?Text;
+    title : Text;
+    year : Nat
+  };
+type Research__908419130 =
+  {
+    createdAt : Int;
+    date : Text;
+    description : Text;
+    id : Nat;
+    imageUrl : ?Text;
+    pdfFileId : ?Text;
+    pdfFileName : ?Text;
+    pdfUrl : ?Text;
+    summary : Text;
+    tags : [Text];
+    title : Text
+  };
+actor ({
+  in articles : List__415060402<OldArticle__297329906>;
+  in notes : List__415060402<OldNote__821963071>;
+  in pdfFiles :
+    Map__605269027<Text,
+                    {
+                      contentType : Text;
+                      fileName : Text;
+                      registeredAt : Int;
+                      url : Text
+                    }>;
+  in publications : List__415060402<OldPublication__206192410>;
+  in researches : List__415060402<OldResearch__619149766>;
+  in sessions : Map__605269027<Text, Int>;
+  in submissions : List__415060402<ContactSubmission__93684224>;
+  stable t0 : Int;
+  stable t1 : Int;
+  stable t2 : Int
+}, {
+  stable articles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Article__129739089]];
+      var elementIndex : Nat__490723111
+    };
+  stable notes :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Note__618118824]];
+      var elementIndex : Nat__490723111
+    };
+  stable pdfFiles :
+    {
+      var root :
+        Node__46230540<Text,
+                        {
+                          contentType : Text;
+                          fileName : Text;
+                          registeredAt : Int;
+                          url : Text
+                        }>;
+      var size : Nat__490723111
+    };
+  stable publications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Publication__571801975]];
+      var elementIndex : Nat__490723111
+    };
+  stable researches :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Research__908419130]];
+      var elementIndex : Nat__490723111
+    };
+  stable sessions :
+    {var root : Node__46230540<Text, Int>; var size : Nat__490723111};
+  stable submissions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ContactSubmission__93684224]];
+      var elementIndex : Nat__490723111
+    };
+  stable t0 : Int;
+  stable t1 : Int;
+  stable t2 : Int
+}) ;

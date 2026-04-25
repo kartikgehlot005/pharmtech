@@ -1,0 +1,223 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type UploadResult = 
+ record {
+   fileId: text;
+   url: text;
+ };
+type SessionToken = text;
+type Result_8 = 
+ variant {
+   err: text;
+   ok: SessionToken;
+ };
+type Result_7 = 
+ variant {
+   err: text;
+   ok: vec ContactSubmission;
+ };
+type Result_6 = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type Result_5 = 
+ variant {
+   err: text;
+   ok;
+ };
+type Result_4 = 
+ variant {
+   err: text;
+   ok: Article;
+ };
+type Result_3 = 
+ variant {
+   err: text;
+   ok: Note;
+ };
+type Result_2 = 
+ variant {
+   err: text;
+   ok: Publication;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: Research;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: UploadResult;
+ };
+type ResearchInput = 
+ record {
+   date: text;
+   description: text;
+   imageUrl: opt text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   summary: text;
+   tags: vec text;
+   title: text;
+ };
+type Research = 
+ record {
+   createdAt: int;
+   date: text;
+   description: text;
+   id: nat;
+   imageUrl: opt text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   summary: text;
+   tags: vec text;
+   title: text;
+ };
+type PublicationInput = 
+ record {
+   abstract: text;
+   authors: vec text;
+   doi: opt text;
+   imageUrl: opt text;
+   journal: text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   title: text;
+   year: nat;
+ };
+type Publication = 
+ record {
+   abstract: text;
+   authors: vec text;
+   createdAt: int;
+   doi: opt text;
+   id: nat;
+   imageUrl: opt text;
+   journal: text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   title: text;
+   year: nat;
+ };
+type NoteInput = 
+ record {
+   content: text;
+   fileName: opt text;
+   fileUrl: opt text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   title: text;
+ };
+type Note = 
+ record {
+   content: text;
+   createdAt: int;
+   fileName: opt text;
+   fileUrl: opt text;
+   id: nat;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   title: text;
+ };
+type ContactSubmission = 
+ record {
+   email: text;
+   id: nat;
+   isRead: bool;
+   message: text;
+   name: text;
+   submittedAt: int;
+ };
+type ArticleInput = 
+ record {
+   category: text;
+   content: text;
+   date: text;
+   excerpt: text;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   tags: vec text;
+   title: text;
+ };
+type Article = 
+ record {
+   category: text;
+   content: text;
+   createdAt: int;
+   date: text;
+   excerpt: text;
+   id: nat;
+   pdfFileId: opt text;
+   pdfFileName: opt text;
+   pdfUrl: opt text;
+   tags: vec text;
+   title: text;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  adminLogin: (username: text, password: text) -> (Result_8);
+  adminLogout: (token: text) -> (Result_5);
+  createArticle: (token: text, input: ArticleInput) -> (Result_4);
+  createArticleWithPdf: (token: text, input: ArticleInput) -> (Result_4);
+  createNote: (token: text, input: NoteInput) -> (Result_3);
+  createPublication: (token: text, input: PublicationInput) -> (Result_2);
+  createPublicationWithPdf: (token: text, input: PublicationInput) ->
+   (Result_2);
+  createResearch: (token: text, input: ResearchInput) -> (Result_1);
+  createResearchWithPdf: (token: text, input: ResearchInput) -> (Result_1);
+  deleteArticle: (token: text, id: nat) -> (Result_5);
+  deleteNote: (token: text, id: nat) -> (Result_5);
+  deletePdf: (token: text, fileId: text) -> (Result_5);
+  deletePublication: (token: text, id: nat) -> (Result_5);
+  deleteResearch: (token: text, id: nat) -> (Result_5);
+  getArticles: () -> (vec Article) query;
+  getContactSubmissions: (token: text) -> (Result_7);
+  getNotes: () -> (vec Note) query;
+  getPdfUrl: (fileId: text) -> (Result_6) query;
+  getPublications: () -> (vec Publication) query;
+  getResearches: () -> (vec Research) query;
+  markContactRead: (token: text, id: nat) -> (Result_5);
+  submitContact: (name: text, email: text, message: text) -> (Result_5);
+  updateArticle: (token: text, id: nat, input: ArticleInput) -> (Result_4);
+  updateArticleWithPdf: (token: text, id: nat, input: ArticleInput) ->
+   (Result_4);
+  updateNote: (token: text, id: nat, input: NoteInput) -> (Result_3);
+  updatePublication: (token: text, id: nat, input: PublicationInput) ->
+   (Result_2);
+  updatePublicationWithPdf: (token: text, id: nat, input:
+   PublicationInput) -> (Result_2);
+  updateResearch: (token: text, id: nat, input: ResearchInput) -> (Result_1);
+  updateResearchWithPdf: (token: text, id: nat, input: ResearchInput) ->
+   (Result_1);
+  uploadPdf: (token: text, fileName: text, contentType: text, fileId:
+   text) -> (Result);
+  validateSession: (token: text) -> (bool) query;
+}

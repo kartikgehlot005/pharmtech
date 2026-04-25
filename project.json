@@ -1,0 +1,23 @@
+{
+  "overview": "Dr. Ashwin Singh Chouhan's professional portfolio website for a pharmacologist and researcher. Features animated 3D sections for Research, Articles, Publications, and Notes with PDF upload/download capabilities. Admin dashboard for content management with drag-and-drop PDF uploads.",
+  "features": [
+    "Dynamic PDF upload and download system",
+    "Drag-and-drop PDF upload in admin dashboard",
+    "View and Download PDF buttons on public pages",
+    "Secure object-storage for PDF files",
+    "3D animated hero and flip cards",
+    "Admin CRUD for Research, Articles, Publications, Notes",
+    "Contact form with admin inbox",
+    "Responsive design for mobile and desktop"
+  ],
+  "category": "portfolio",
+  "tags": [
+    "portfolio",
+    "research",
+    "pharmacy",
+    "pdf",
+    "academic",
+    "3d-animations"
+  ],
+  "last_updated": "2026-04-24T18:40:08.656Z"
+}
